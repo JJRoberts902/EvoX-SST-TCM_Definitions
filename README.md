@@ -10,11 +10,11 @@ This guide explains the practical purpose of every parent calibration table in t
 
 The map pack is designed for calibration users who want a readable map definition rather than a collection of anonymous placeholders. Shift tables are named by the gear transition they control, clutch tables identify clutch 1 or clutch 2, torque-coordination tables identify the shift phase they affect, and diagnostic tables explain the protection boundary they enforce.
 
-The XML also identifies the actual lookup axes—such as RPM, input-shaft speed, engine torque, accelerator pedal position, vehicle speed, road load, longitudinal acceleration, clutch slip speed, clutch temperature, shift row, position error, and normalized shift progress. This makes the pack useful for understanding how a value is consumed before making a calibration decision.
+The XML also identifies the actual lookup axesâ€”such as RPM, input-shaft speed, engine torque, accelerator pedal position, vehicle speed, road load, longitudinal acceleration, clutch slip speed, clutch temperature, shift row, position error, and normalized shift progress. This makes the pack useful for understanding how a value is consumed before making a calibration decision.
 
 There is no blanket XY swap rule. The axis order shown for each table follows the firmware lookup orientation and the XML definition; use the named X/Y roles rather than swapping every map by default.
 
-This is a calibration reference, not a generic “map list.” Each description explains what the value or surface is intended to influence, what the axes represent, and why changing it can affect shift behavior, clutch protection, adaptation, or diagnostics.
+This is a calibration reference, not a generic â€œmap list.â€ Each description explains what the value or surface is intended to influence, what the axes represent, and why changing it can affect shift behavior, clutch protection, adaptation, or diagnostics.
 
 ## How to use the variant records
 
@@ -43,7 +43,7 @@ The following inventory contains every XML parent table. Child axis definitions 
 These tables are the transmission's shift-request layer. They set the vehicle-speed boundaries for each upshift/downshift and add corrections for shift row, acceleration, road load, accelerator position, and vehicle tilt.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 1 | Downshift Speed Correction vs Shift Row - Variant Code 0 | 2D | Shift Row (X-axis, 8 points) | Applies a shift-row correction to downshift speed correction vs shift row, moving the schedule for the selected operating condition. |
 | 2 | Upshift Speed Correction vs Shift Row - Variant Code 0 | 2D | Shift Row (X-axis, 8 points) | Applies a shift-row correction to upshift speed correction vs shift row, moving the schedule for the selected operating condition. |
 | 3 | Downshift Speed Correction vs Longitudinal Acceleration - Variant Code 0 | 2D | Longitudinal Acceleration (X-axis, 5 points) | Adds the calibrated correction described by downshift speed correction vs longitudinal acceleration to the base shift schedule. |
@@ -108,7 +108,7 @@ These tables are the transmission's shift-request layer. They set the vehicle-sp
 These tables shape the actual shift event after a shift is requested. They coordinate engine-speed targets, torque intervention, synchronizer speed, clutch handover, shift timing, shift quality, shift-fork movement, and torque ramping.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 58 | Normal Shift Response Time vs Input Shaft Speed - Variant Code 0 | 2D | Input Shaft Speed (X-axis, 4 points) | Sets the expected shift response time for normal shift response time vs input shaft speed, helping the TCM pace the event. |
 | 59 | Sport Shift Response Time vs Input Shaft Speed - Variant Code 0 | 2D | Input Shaft Speed (X-axis, 4 points) | Sets the expected shift response time for sport shift response time vs input shaft speed, helping the TCM pace the event. |
 | 60 | S-Sport Shift Response Time vs Input Shaft Speed - Variant Code 0 | 2D | Input Shaft Speed (X-axis, 4 points) | Sets the expected shift response time for s-sport shift response time vs input shaft speed, helping the TCM pace the event. |
@@ -329,7 +329,7 @@ These tables shape the actual shift event after a shift is requested. They coord
 These tables convert torque, engine speed, clutch temperature, and slip conditions into hydraulic pressure targets and pressure corrections for clutch 1 and clutch 2.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 271 | Clutch 1 Base Pressure Correction vs Engine Torque - Variant Code 0 | 2D | Engine Torque (X-axis, 8 points) | Applies the base pressure correction for clutch 1 base pressure correction vs engine torque as engine torque changes. |
 | 272 | Clutch 2 Base Pressure Correction vs Engine Torque - Variant Code 0 | 2D | Engine Torque (X-axis, 8 points) | Applies the base pressure correction for clutch 2 base pressure correction vs engine torque as engine torque changes. |
 | 273 | Clutch 1 Dynamic Pressure Correction vs Engine Torque - Variant Code 0 | 2D | Engine Torque (X-axis, 8 points) | Applies the dynamic pressure correction for clutch 1 dynamic pressure correction vs engine torque as engine torque changes. |
@@ -400,7 +400,7 @@ These tables convert torque, engine speed, clutch temperature, and slip conditio
 These tables govern the learning layer. They determine how the TCM learns fork position, clutch fill, touch point, friction, apply/release behavior, neutral behavior, and learning limits.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 334 | Shift-Fork Position-Error Transfer - Forward - Variant Code 0 | 2D | Shift Fork Position Error (X-axis, 24 points) | Defines the shift-fork position-error transfer - forward used to convert measured fork-position error into the learned correction. |
 | 335 | Shift-Fork Position-Error Transfer - Inverse - Variant Code 0 | 2D | Forward Position-Error Transfer Output (X-axis, 47 points) | Defines the shift-fork position-error transfer - inverse used to convert measured fork-position error into the learned correction. |
 | 336 | Clutch Fill Adaptation Gain vs Engine Torque - Variant Code 0 | 2D | Engine Torque (X-axis, 9 points) | Sets the learning gain for clutch fill adaptation gain vs engine torque, controlling how quickly the TCM updates the adaptive value. |
@@ -447,7 +447,7 @@ These tables govern the learning layer. They determine how the TCM learns fork p
 These tables describe the mechanical model used by the TCM: drivetrain losses, clutch pressure-to-torque behavior, gear ratios, ratio plausibility, ratio blending, and desired clutch torque limits.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 373 | Drive Drivetrain-Loss Torque vs Engine Speed and Torque - Variant Code 0 | 3D | Engine Torque (X-axis, 7 points); Engine Speed (Y-axis, 6 points) | Models drive drivetrain-loss torque vs engine speed and torque so the TCM can separate true transmitted torque from mechanical drivetrain loss. |
 | 374 | Coast Drivetrain-Loss Torque vs Engine Speed and Torque - Variant Code 0 | 3D | Engine Torque (X-axis, 7 points); Engine Speed (Y-axis, 6 points) | Models coast drivetrain-loss torque vs engine speed and torque so the TCM can separate true transmitted torque from mechanical drivetrain loss. |
 | 375 | Learned Clutch Pressure-to-Torque Characteristic - Variant Code 0 | 2D | Live Learned Clutch Characteristic Node (index, 13 points) | Defines the learned relationship between clutch pressure and transmitted torque for learned clutch pressure-to-torque characteristic. |
@@ -497,7 +497,7 @@ These tables describe the mechanical model used by the TCM: drivetrain losses, c
 These tables are protection and plausibility boundaries. They debounce torque signals, define shift-inhibit timing, and set maximum allowed disengagement times for each gear transition.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 415 | Torque-Signal Plausibility Debounce vs Engine Torque - Variant Code 0 | 2D | Engine Torque (X-axis, 7 points) | Sets the confirmation/debounce behavior for torque-signal plausibility debounce vs engine torque, filtering brief or noisy events. |
 | 416 | Engine-Torque Normalization vs Engine Torque - Variant Code 0 | 2D | Engine Torque (X-axis, 7 points) | Scales and normalizes the torque signal for engine-torque normalization vs engine torque before diagnostic comparisons are made. |
 | 417 | Negative-Torque Lower Plausibility Boundary - Variant Code 0 | 2D | Engine Torque (X-axis, 5 points) | Defines the allowed plausibility boundary for negative-torque lower plausibility boundary, used to detect an inconsistent torque or position signal. |
@@ -562,7 +562,7 @@ These tables are protection and plausibility boundaries. They debounce torque si
 These single-value calibrations provide global limits and mode controls, including torque/engine-speed overlimit stages, S-Sport activation, maximum desired clutch torque, temperature/slip gain scaling, cold-operation row selection, and failsafe row selection.
 
 | # | XML table | Type | Axes / index | Purpose |
-|---:|---|---|---:|---|---|
+|---:|---|---|---:|---|
 | 472 | Torque Overlimit Stage 1 - 1st Gear and Reverse - Variant Code 0 | 1D | Scalar value; no external axis | Sets the torque overlimit stage 1 - 1st gear and reverse threshold used to protect the transmission from excessive requested torque. |
 | 473 | Torque Overlimit Stage 2 - 1st Gear and Reverse - Variant Code 0 | 1D | Scalar value; no external axis | Sets the torque overlimit stage 2 - 1st gear and reverse threshold used to protect the transmission from excessive requested torque. |
 | 474 | Torque Overlimit Stage 1 - Gears 2 through 6 - Variant Code 0 | 1D | Scalar value; no external axis | Sets the torque overlimit stage 1 - gears 2 through 6 threshold used to protect the transmission from excessive requested torque. |
@@ -618,4 +618,4 @@ These single-value calibrations provide global limits and mode controls, includi
 
 The pack is intended for users who understand TC-SST calibration and have suitable logging, temperature monitoring, clutch adaptation procedures, and a known-good stock backup. Make one related change at a time, verify clutch slip and shift time, and confirm that the selected variant record is the one used by the target ROM. The descriptions explain intended function; they are not promises of a universal safe value for every vehicle, clutch, fluid, or software revision.
 
-— EvoPro Engineering
+â€” EvoPro Engineering
